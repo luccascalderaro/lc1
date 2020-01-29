@@ -1,12 +1,15 @@
 package com.luccascalderaro.lc1.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
@@ -25,6 +28,9 @@ public class SubEspecialidade implements Serializable {
 	@JoinColumn(name="especialidade_id")
 	@NotNull
 	private Especialidade especialidade;
+	
+	@ManyToMany(mappedBy = "subEspecialidade")
+	private List<Medico> medico = new ArrayList<>();
 	
 	public SubEspecialidade() {
 		
@@ -59,6 +65,16 @@ public class SubEspecialidade implements Serializable {
 
 	public void setEspecialidade(Especialidade especialidade) {
 		this.especialidade = especialidade;
+	}
+	
+	
+
+	public List<Medico> getMedico() {
+		return medico;
+	}
+
+	public void setMedico(List<Medico> medico) {
+		this.medico = medico;
 	}
 
 	@Override
