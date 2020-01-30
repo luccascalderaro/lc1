@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Especialidade implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -22,6 +24,7 @@ public class Especialidade implements Serializable {
 	@NotNull
 	private String nome;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "especialidade")
 	private List<SubEspecialidade> subEspecialidade = new ArrayList<>();
 	

@@ -6,10 +6,14 @@ import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.luccascalderaro.lc1.domain.Especialidade;
 import com.luccascalderaro.lc1.domain.GrupoProcedimento;
 import com.luccascalderaro.lc1.domain.Procedimento;
+import com.luccascalderaro.lc1.domain.SubEspecialidade;
+import com.luccascalderaro.lc1.repositories.EspecialidadeRepository;
 import com.luccascalderaro.lc1.repositories.GrupoProcedimentoRepository;
 import com.luccascalderaro.lc1.repositories.ProcedimentoRepository;
+import com.luccascalderaro.lc1.repositories.SubEspecialidadeRepository;
 
 @Service
 public class DBService {
@@ -19,6 +23,15 @@ public class DBService {
 
 	@Autowired
 	private GrupoProcedimentoRepository grupoProcedimentoRepository;
+	
+	
+	@Autowired
+	private EspecialidadeRepository especialidadeRepository;
+	
+	@Autowired
+	private SubEspecialidadeRepository subEspecialidadeRepository;
+	
+	
 
 	public void instantiateDatabase() throws ParseException {
 		
@@ -36,6 +49,33 @@ public class DBService {
 		
 		grupoProcedimentoRepository.saveAll(Arrays.asList(grup1,grup2));
 		procedimentoRepository.saveAll(Arrays.asList(proc1,proc2,proc3));
+		
+		Especialidade esp1 = new Especialidade(null, "Cardiologia");
+		
+		Especialidade esp2 = new Especialidade(null, "Ortopedia");
+		
+		
+		SubEspecialidade sub1 = new SubEspecialidade(null, "Sub1-C.", esp1);
+		
+		SubEspecialidade sub2 =  new SubEspecialidade(null, "Sub2-C", esp1);
+		
+		SubEspecialidade sub3 = new SubEspecialidade(null, "Sub1-O", esp2);
+		
+		SubEspecialidade sub4 = new SubEspecialidade(null, "Sub2-O", esp2);
+		
+		SubEspecialidade sub5 = new SubEspecialidade(null, "Sub3-O", esp2);
+		
+		esp1.getSubEspecialidade().addAll(Arrays.asList(sub1,sub2));
+		
+		esp2.getSubEspecialidade().addAll(Arrays.asList(sub3,sub4,sub5));
+		
+		
+		
+		especialidadeRepository.saveAll(Arrays.asList(esp1,esp2));
+		
+		subEspecialidadeRepository.saveAll(Arrays.asList(sub1,sub2,sub3,sub4,sub5));
+	
+		
 		
 		
 
