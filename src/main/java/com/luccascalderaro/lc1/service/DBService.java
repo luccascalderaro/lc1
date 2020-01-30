@@ -8,10 +8,12 @@ import org.springframework.stereotype.Service;
 
 import com.luccascalderaro.lc1.domain.Especialidade;
 import com.luccascalderaro.lc1.domain.GrupoProcedimento;
+import com.luccascalderaro.lc1.domain.Medico;
 import com.luccascalderaro.lc1.domain.Procedimento;
 import com.luccascalderaro.lc1.domain.SubEspecialidade;
 import com.luccascalderaro.lc1.repositories.EspecialidadeRepository;
 import com.luccascalderaro.lc1.repositories.GrupoProcedimentoRepository;
+import com.luccascalderaro.lc1.repositories.MedicoRepository;
 import com.luccascalderaro.lc1.repositories.ProcedimentoRepository;
 import com.luccascalderaro.lc1.repositories.SubEspecialidadeRepository;
 
@@ -30,6 +32,9 @@ public class DBService {
 	
 	@Autowired
 	private SubEspecialidadeRepository subEspecialidadeRepository;
+	
+	@Autowired
+	private MedicoRepository medicoRepository;
 	
 	
 
@@ -74,8 +79,20 @@ public class DBService {
 		especialidadeRepository.saveAll(Arrays.asList(esp1,esp2));
 		
 		subEspecialidadeRepository.saveAll(Arrays.asList(sub1,sub2,sub3,sub4,sub5));
-	
 		
+		
+		
+		Medico med1 = new Medico(null, "Luccas", "luccasc@hotmail.com", "6566565", "Rua teste 1");
+		
+		med1.getTelefone().addAll(Arrays.asList("36337436","36355689"));
+		
+		med1.getSubEspecialidade().addAll(Arrays.asList(sub1));
+		
+		
+		medicoRepository.saveAll(Arrays.asList(med1));
+		
+		
+
 		
 		
 
