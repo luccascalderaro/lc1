@@ -15,41 +15,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.luccascalderaro.lc1.domain.SubEspecialidade;
-import com.luccascalderaro.lc1.service.SubEspecialidadeService;
+import com.luccascalderaro.lc1.domain.Procedimento;
+import com.luccascalderaro.lc1.service.ProcedimentoService;
 
 @RestController
-@RequestMapping(value = "/subespecialidades")
-public class SubEspecialidadeResource {
+@RequestMapping(value = "/procedimentos")
+public class ProcedimentoResource {
 
 	@Autowired
-	private SubEspecialidadeService service;
+	private ProcedimentoService service;
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<SubEspecialidade> find(@PathVariable Integer id) {
+	public ResponseEntity<Procedimento> find(@PathVariable Integer id) {
 
-		SubEspecialidade obj = service.find(id);
+		Procedimento obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Void> insert(@Valid @RequestBody SubEspecialidade obj){
+	public ResponseEntity<Procedimento> insert(@Valid @RequestBody Procedimento obj){
 		
-		obj = service.insert(obj);
-		
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+		 obj = service.insert(obj);
+		 
+		 URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getNome()).toUri();
 		
 		return ResponseEntity.created(uri).build();
-		
 	}
 	
 	@DeleteMapping(value="/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Integer id){
+		
 		service.delete(id);
 		
-		
 		return ResponseEntity.noContent().build();
-		
 	}
 
 }
