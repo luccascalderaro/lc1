@@ -1,5 +1,6 @@
 package com.luccascalderaro.lc1.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,10 @@ public class ProcedimentoService {
 		catch(DataIntegrityViolationException e) {
 			new DataIntegrityViolationException("Nao foi possivel excluir o Procedimento");
 		}
+	}
+	
+	public List<Procedimento> findAll(){
+		return repo.findAll();
 	}
 
 }

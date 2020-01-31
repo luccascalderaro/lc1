@@ -1,5 +1,6 @@
 package com.luccascalderaro.lc1.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,10 @@ public class GrupoProcedimentoService {
 			// TODO: handle exception
 		}
 		
+	}
+	
+	public List<GrupoProcedimento> findAll(){
+		return repo.findAll();
 	}
 	
 	

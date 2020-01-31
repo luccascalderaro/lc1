@@ -1,5 +1,6 @@
 package com.luccascalderaro.lc1.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,12 @@ public class EspecialidadeService {
 			throw new DataIntegrityException("Não foi possivel deletar a especialidade pois ela ainda tem vinculos");
 		}
 
+	}
+	
+	public List<Especialidade> findAll(){
+		
+		return repo.findAll();
+		
 	}
 
 }

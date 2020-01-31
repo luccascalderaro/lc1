@@ -1,5 +1,6 @@
 package com.luccascalderaro.lc1.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,10 @@ public class SubEspecialidadeService {
 			throw new DataIntegrityException("Nao foi possivel excluir essa SubEspecialidade");
 		}
 		
+	}
+	
+	public List<SubEspecialidade> findAll(){
+		return repo.findAll();
 	}
 	
 }
