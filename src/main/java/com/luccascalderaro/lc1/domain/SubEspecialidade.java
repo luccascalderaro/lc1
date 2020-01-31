@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class SubEspecialidade implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -29,6 +31,7 @@ public class SubEspecialidade implements Serializable {
 	@NotNull
 	private Especialidade especialidade;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy = "subEspecialidade")
 	private List<Medico> medico = new ArrayList<>();
 	

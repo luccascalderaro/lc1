@@ -14,33 +14,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.luccascalderaro.lc1.domain.Especialidade;
-import com.luccascalderaro.lc1.service.EspecialidadeService;
+import com.luccascalderaro.lc1.domain.SubEspecialidade;
+import com.luccascalderaro.lc1.service.SubEspecialidadeService;
 
 @RestController
-@RequestMapping(value = "/especialidades")
-public class EspecialidadeResource {
+@RequestMapping(value = "/subespecialidades")
+public class SubEspecialidadeResource {
 
 	@Autowired
-	private EspecialidadeService service;
+	private SubEspecialidadeService service;
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Especialidade> find(@PathVariable Integer id) {
+	public ResponseEntity<SubEspecialidade> find(@PathVariable Integer id) {
 
-		Especialidade obj = service.find(id);
-
+		SubEspecialidade obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
-
 	}
-
+	
 	@PostMapping
-	public ResponseEntity<Void> insert(@Valid @RequestBody Especialidade obj) {
+	public ResponseEntity<Void> insert(@Valid @RequestBody SubEspecialidade obj){
+		
 		obj = service.insert(obj);
-
+		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-
+		
 		return ResponseEntity.created(uri).build();
-
+		
 	}
 
 }
