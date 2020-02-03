@@ -9,11 +9,15 @@ import org.springframework.stereotype.Service;
 import com.luccascalderaro.lc1.domain.Especialidade;
 import com.luccascalderaro.lc1.domain.GrupoProcedimento;
 import com.luccascalderaro.lc1.domain.Medico;
+import com.luccascalderaro.lc1.domain.Prestador;
+import com.luccascalderaro.lc1.domain.PrestadorEndereco;
 import com.luccascalderaro.lc1.domain.Procedimento;
 import com.luccascalderaro.lc1.domain.SubEspecialidade;
 import com.luccascalderaro.lc1.repositories.EspecialidadeRepository;
 import com.luccascalderaro.lc1.repositories.GrupoProcedimentoRepository;
 import com.luccascalderaro.lc1.repositories.MedicoRepository;
+import com.luccascalderaro.lc1.repositories.PrestadorEnderecoRepository;
+import com.luccascalderaro.lc1.repositories.PrestadorRepository;
 import com.luccascalderaro.lc1.repositories.ProcedimentoRepository;
 import com.luccascalderaro.lc1.repositories.SubEspecialidadeRepository;
 
@@ -35,6 +39,12 @@ public class DBService {
 	
 	@Autowired
 	private MedicoRepository medicoRepository;
+	
+	@Autowired
+	private PrestadorRepository prestadorRepository;
+	
+	@Autowired
+	private PrestadorEnderecoRepository prestadorEnderecoRepository;
 	
 	
 
@@ -92,8 +102,24 @@ public class DBService {
 		medicoRepository.saveAll(Arrays.asList(med1));
 		
 		
-
+		Prestador pre1 = new Prestador(null, "99593374000125", "Prestador 1");
 		
+		Prestador pre2 = new Prestador(null, "66988325000132", "Prestador 2");
+		
+		PrestadorEndereco pEnd1 = new PrestadorEndereco(null, "P.Endereco 1", pre1);
+		
+		PrestadorEndereco pEnd2 = new PrestadorEndereco(null, "P.Endereco 2", pre1);
+
+		PrestadorEndereco pEnd3 = new PrestadorEndereco(null, "P.Endereco 1", pre2);
+		
+		
+		pre1.getEnderecos().addAll(Arrays.asList(pEnd1,pEnd2));
+		
+		pre2.getEnderecos().addAll(Arrays.asList(pEnd3));
+		
+		prestadorRepository.saveAll(Arrays.asList(pre1,pre2));
+		
+		prestadorEnderecoRepository.saveAll(Arrays.asList(pEnd1,pEnd2,pEnd3));
 		
 
 	}

@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.validator.constraints.br.CNPJ;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Prestador implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -25,7 +27,7 @@ public class Prestador implements Serializable {
 	
 	private String nomePrestador;
 	
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "prestador")
 	private List<PrestadorEndereco> enderecos = new ArrayList<>();
 	
