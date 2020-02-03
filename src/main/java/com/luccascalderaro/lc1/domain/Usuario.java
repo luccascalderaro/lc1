@@ -42,6 +42,7 @@ public class Usuario implements Serializable {
 
 
 	public Usuario () {
+		addPerfil(Perfil.CLIENTE);
 		
 	}
 
@@ -52,6 +53,7 @@ public class Usuario implements Serializable {
 		this.login = login;
 		this.senha = senha;
 		this.email = email;
+		addPerfil(Perfil.CLIENTE);
 	}
 
 
