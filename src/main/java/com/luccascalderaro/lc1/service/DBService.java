@@ -47,6 +47,8 @@ public class DBService {
 	private PrestadorEnderecoRepository prestadorEnderecoRepository;
 	
 	
+	
+	
 
 	public void instantiateDatabase() throws ParseException {
 		

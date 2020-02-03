@@ -52,7 +52,7 @@ public class GrupoProcedimentoService {
 		
 		catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Nao foi possivel deletar o Grupo de Procedimento");
-			// TODO: handle exception
+			
 		}
 		
 	}

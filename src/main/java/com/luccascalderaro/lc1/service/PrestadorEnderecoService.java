@@ -56,6 +56,8 @@ public class PrestadorEnderecoService {
 
 	public PrestadorEndereco insert(PrestadorEndereco obj) {
 		
+		obj.setId(null);
+		
 		return repo.save(obj);
 
 	}
