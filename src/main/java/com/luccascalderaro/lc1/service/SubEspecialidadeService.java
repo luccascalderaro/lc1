@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.luccascalderaro.lc1.domain.SubEspecialidade;
@@ -55,7 +56,7 @@ public class SubEspecialidadeService {
 		repo.deleteById(id);
 		}
 		
-		catch(ObjectNotFoundException e) {
+		catch(DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Nao foi possivel excluir essa SubEspecialidade");
 		}
 		

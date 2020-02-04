@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.luccascalderaro.lc1.domain.Prestador;
@@ -34,7 +35,7 @@ public class PrestadorService {
 		try {
 		repo.deleteById(id);
 		}
-		catch(DataIntegrityException e) {
+		catch(DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Não foi possivel deletar o Prestador");
 			
 		}
