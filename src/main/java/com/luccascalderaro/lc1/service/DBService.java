@@ -98,7 +98,7 @@ public class DBService {
 		
 		med1.getTelefone().addAll(Arrays.asList("36337436","36355689"));
 		
-		med1.getSubEspecialidade().addAll(Arrays.asList(sub1));
+		med1.getSubEspecialidade().addAll(Arrays.asList(sub1,sub3));
 		
 		
 		medicoRepository.saveAll(Arrays.asList(med1));

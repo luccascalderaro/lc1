@@ -104,6 +104,18 @@ public class SubEspecialidade implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(nome);
+		
+		return builder.toString();
+	}
+	
+	
+	
+	
 	
 	
 	
