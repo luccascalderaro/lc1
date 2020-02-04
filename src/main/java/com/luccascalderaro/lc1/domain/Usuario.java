@@ -39,11 +39,13 @@ public class Usuario implements Serializable {
 	@CollectionTable(name = "PERFIL")
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Set<Integer> perfilList = new HashSet<>();
+	
+	
 
 
 	public Usuario () {
 		addPerfil(Perfil.CLIENTE);
-		
+			
 	}
 
 
@@ -54,6 +56,7 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 		this.email = email;
 		addPerfil(Perfil.CLIENTE);
+		
 	}
 
 
@@ -96,15 +99,16 @@ public class Usuario implements Serializable {
 		this.email = email;
 	}
 	
-
-	public Set<Perfil> getPerfilList(){
-		return perfilList.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
-		
+	
+	public Set<Perfil> getPerfilList(Integer cod){
+		return perfilList.stream().map(x -> Perfil.toEnum(cod)).collect(Collectors.toSet());
 	}
-
+	
+	
 	public void addPerfil(Perfil cod) {
-		perfilList.add(cod.getCod());
+		 perfilList.add(cod.getCod());
 	}
+	
 	
 
 	@Override
