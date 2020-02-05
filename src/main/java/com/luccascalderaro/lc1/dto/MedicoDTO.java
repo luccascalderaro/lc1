@@ -64,6 +64,7 @@ public class MedicoDTO implements Serializable {
 		String nome = null;
 
 		for (SubEspecialidade subEsp : obj.getSubEspecialidade()) {
+			
 			for (SubEspecialidade subEsp2 : listSub) {
 				if (subEsp.equals(subEsp2)) {
 					SubEspecialidade sub_ok = subEsp;
