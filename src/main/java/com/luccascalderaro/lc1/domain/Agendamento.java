@@ -86,6 +86,11 @@ public class Agendamento implements Serializable {
 	public void setStatusAgendamento(StatusAgendamento statusAgendamento) {
 		this.statusAgendamento = statusAgendamento;
 	}
+	
+	public static String emailPaciente(Paciente paciente) {
+		return paciente.getEmail();
+		
+	}
 
 	@Override
 	public int hashCode() {
@@ -111,5 +116,24 @@ public class Agendamento implements Serializable {
 			return false;
 		return true;
 	}
+
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("O Agendamento do senhor(a) ");
+		builder.append(paciente.getNome());
+		builder.append(" para data ");
+		builder.append(agenda.getData());
+		builder.append(" no horario ");
+		builder.append(agenda.getHorario());
+		builder.append(" na especialidade ");
+		builder.append(subespecialidade.getNome());
+		builder.append(" foi realizado com sucesso. ");
+		return builder.toString();
+	}
+	
+	
+	
 
 }

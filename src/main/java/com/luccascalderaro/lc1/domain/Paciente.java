@@ -12,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -23,6 +25,7 @@ public class Paciente implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	@NotNull
 	private String nome;
 
 	@CollectionTable(name = "TELEFONE_CLIENTE")
@@ -38,17 +41,23 @@ public class Paciente implements Serializable {
 	private List<Agendamento> agendamento;
 	
 	
+	@Email
+	@NotNull
+	private String email;
+	
+	
 	public Paciente() {
 		
 	}
 	
 
-	public Paciente(Integer id, String nome, String endereco, Date nascimento) {
+	public Paciente(Integer id, String nome, String endereco, Date nascimento, String email) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.endereco = endereco;
 		this.nascimento = nascimento;
+		this.email = email;
 	}
 
 	public Integer getId() {
@@ -97,6 +106,43 @@ public class Paciente implements Serializable {
 
 	public void setAgendamento(List<Agendamento> agendamento) {
 		this.agendamento = agendamento;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Paciente other = (Paciente) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 	
 	
