@@ -2,12 +2,15 @@ package com.luccascalderaro.lc1.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import com.luccascalderaro.lc1.domain.enums.StatusCadastroAgenda;
 
@@ -19,17 +22,24 @@ public class Agenda implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@ManyToOne
+	@JoinColumn(name="medico_id")
 	private Medico medico;
 	
 	private Date data;
 	
 	private Integer horario;
 	
-	private Integer tempoConsulta;
+	private Integer tempo;
 	
 	private StatusCadastroAgenda status;
 	
-	private List<Agendamento> agendamento;
+	@ManyToOne
+	@JoinColumn(name="cadastroAgenda_id")
+	private CadastroAgenda cadastroAgenda;
+	
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "agenda")
+	private Agendamento agendamento;
 	
 	
 	public Agenda() {
@@ -38,14 +48,14 @@ public class Agenda implements Serializable {
 	
 
 
-	public Agenda(Integer id, Medico medico, Date data, Integer horario, Integer tempoConsulta,
+	public Agenda(Integer id, Medico medico, Date data, Integer horario, Integer tempo,
 			StatusCadastroAgenda status) {
 		super();
 		this.id = id;
 		this.medico = medico;
 		this.data = data;
 		this.horario = horario;
-		this.tempoConsulta = tempoConsulta;
+		this.tempo = tempo;
 		this.status = status;
 	}
 
@@ -91,13 +101,13 @@ public class Agenda implements Serializable {
 	}
 
 
-	public Integer getTempoConsulta() {
-		return tempoConsulta;
+	public Integer getTempo() {
+		return tempo;
 	}
 
 
-	public void setTempoConsulta(Integer tempoConsulta) {
-		this.tempoConsulta = tempoConsulta;
+	public void setTempo(Integer tempo) {
+		this.tempo = tempo;
 	}
 
 
@@ -112,14 +122,14 @@ public class Agenda implements Serializable {
 	
 	
 
-	public List<Agendamento> getAgendamento() {
+	public Agendamento getAgendamento() {
 		return agendamento;
 	}
 
 
 
 
-	public void setAgendamento(List<Agendamento> agendamento) {
+	public void setAgendamento(Agendamento agendamento) {
 		this.agendamento = agendamento;
 	}
 

@@ -47,8 +47,6 @@ public class DBService {
 	private PrestadorEnderecoRepository prestadorEnderecoRepository;
 	
 	
-	
-	
 
 	public void instantiateDatabase() throws ParseException {
 		
@@ -122,6 +120,11 @@ public class DBService {
 		prestadorRepository.saveAll(Arrays.asList(pre1,pre2));
 		
 		prestadorEnderecoRepository.saveAll(Arrays.asList(pEnd1,pEnd2,pEnd3));
+		
+		//Agenda ag = new Agenda(null, med1, Calendar.getInstance().getTime(), 12, 30, StatusCadastroAgenda.ATIVO);
+		
+		
+		
 		
 
 	}
