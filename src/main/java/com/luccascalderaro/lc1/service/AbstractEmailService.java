@@ -11,6 +11,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
 import com.luccascalderaro.lc1.domain.Agendamento;
 
@@ -26,11 +27,13 @@ public abstract class AbstractEmailService implements EmailService {
 	private JavaMailSender javaMailSender;
 	
 	@Autowired
-	private TemplateEngine templaEngine;
+	private TemplateEngine templateEngine;
 
 	@Override
 	public void enviarConfirmacaoAgendamento(Agendamento obj) {
-		// TODO Auto-generated method stub
+		
+		SimpleMailMessage sm = prepararEmailAgendamento(obj);
+		enviarEmail(sm);
 
 	}
 	
@@ -49,8 +52,22 @@ public abstract class AbstractEmailService implements EmailService {
 
 	@Override
 	public void enviarConfirmacaoAgendamentoHtml(Agendamento obj) {
-		
+		try {
+			MimeMessage mm = prepararEmailAgendamentoHtml(obj);
+			enviarEmailHtml(mm);
+			}
+			catch(MessagingException e) {
+				enviarConfirmacaoAgendamento(obj);
+			}
 
+	}
+	
+	
+	protected String htmlFromTemplateAgendamento(Agendamento obj) {
+		Context context = new Context();
+		context.setVariable("agendamento", obj);
+		return templateEngine.process("email/confirmacaoPedido", context);
+		
 	}
 	
 	public MimeMessage prepararEmailAgendamentoHtml(Agendamento obj) throws MessagingException {
@@ -61,7 +78,7 @@ public abstract class AbstractEmailService implements EmailService {
 		mmh.setFrom(sender);
 		mmh.setSubject("Confirmação de Agendamento");
 		mmh.setSentDate(new Date(System.currentTimeMillis()));
-		mmh.setText(obj.toString());
+		mmh.setText(htmlFromTemplateAgendamento(obj),true);
 		
 		return mime;
 		

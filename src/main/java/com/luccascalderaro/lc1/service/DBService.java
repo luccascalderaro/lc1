@@ -9,10 +9,13 @@ import org.springframework.stereotype.Service;
 import com.luccascalderaro.lc1.domain.Especialidade;
 import com.luccascalderaro.lc1.domain.GrupoProcedimento;
 import com.luccascalderaro.lc1.domain.Medico;
+import com.luccascalderaro.lc1.domain.Paciente;
 import com.luccascalderaro.lc1.domain.Prestador;
 import com.luccascalderaro.lc1.domain.PrestadorEndereco;
 import com.luccascalderaro.lc1.domain.Procedimento;
 import com.luccascalderaro.lc1.domain.SubEspecialidade;
+import com.luccascalderaro.lc1.repositories.AgendaRepository;
+import com.luccascalderaro.lc1.repositories.CadastroAgendaRepository;
 import com.luccascalderaro.lc1.repositories.EspecialidadeRepository;
 import com.luccascalderaro.lc1.repositories.GrupoProcedimentoRepository;
 import com.luccascalderaro.lc1.repositories.MedicoRepository;
@@ -45,6 +48,13 @@ public class DBService {
 	
 	@Autowired
 	private PrestadorEnderecoRepository prestadorEnderecoRepository;
+	
+	@Autowired
+	private AgendaRepository agendaRepository;
+	
+	@Autowired
+	private CadastroAgendaRepository cadastroAgendaRepository;
+	
 	
 	
 
