@@ -30,7 +30,7 @@ public class Medico implements Serializable{
 	private String nome;
 	
 	@ElementCollection
-	@CollectionTable(name = "TELEFONE")
+	@CollectionTable(name = "TELEFONE_MEDICO")
 	private Set<String> telefone = new HashSet<>();
 	
 	@NotNull

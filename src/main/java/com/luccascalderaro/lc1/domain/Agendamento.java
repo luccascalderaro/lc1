@@ -7,31 +7,52 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.luccascalderaro.lc1.domain.enums.StatusAgendamento;
 
 @Entity
 public class Agendamento implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	
+
 	@JsonIgnore
 	@OneToOne
-	@JoinColumn(name="agenda_id")
+	@JoinColumn(name = "agenda_id")
 	@MapsId
 	private Agenda agenda;
+
+	@ManyToOne
+	@JoinColumn(name = "paciente_id")
+	private Paciente paciente;
 	
-	
+	@ManyToOne
+	@JoinColumn(name = "subespecialidade_id")
+	private SubEspecialidade subespecialidade;
+
+	private StatusAgendamento statusAgendamento;
 
 	public Agendamento() {
 
 	}
+	
+
+	public Agendamento(Integer id, Agenda agenda, Paciente paciente, SubEspecialidade subespecialidade,
+			StatusAgendamento statusAgendamento) {
+		super();
+		this.id = id;
+		this.agenda = agenda;
+		this.paciente = paciente;
+		this.subespecialidade = subespecialidade;
+		this.statusAgendamento = statusAgendamento;
+	}
+
 
 	public Integer getId() {
 		return id;
@@ -41,6 +62,30 @@ public class Agendamento implements Serializable {
 		this.id = id;
 	}
 	
+	
+	public Agenda getAgenda() {
+		return agenda;
+	}
+
+	public void setAgenda(Agenda agenda) {
+		this.agenda = agenda;
+	}
+
+	public Paciente getPaciente() {
+		return paciente;
+	}
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
+	}
+
+	public StatusAgendamento getStatusAgendamento() {
+		return statusAgendamento;
+	}
+
+	public void setStatusAgendamento(StatusAgendamento statusAgendamento) {
+		this.statusAgendamento = statusAgendamento;
+	}
 
 	@Override
 	public int hashCode() {
@@ -66,8 +111,5 @@ public class Agendamento implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
+
 }
