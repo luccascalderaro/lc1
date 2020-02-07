@@ -8,10 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.luccascalderaro.lc1.domain.enums.StatusAgendamento;
 
 @Entity
@@ -22,10 +19,9 @@ public class Agendamento implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@JsonIgnore
-	@OneToOne
+	
+	@ManyToOne
 	@JoinColumn(name = "agenda_id")
-	@MapsId
 	private Agenda agenda;
 
 	@ManyToOne
@@ -91,6 +87,17 @@ public class Agendamento implements Serializable {
 		return paciente.getEmail();
 		
 	}
+	
+	
+	public SubEspecialidade getSubespecialidade() {
+		return subespecialidade;
+	}
+
+
+	public void setSubespecialidade(SubEspecialidade subespecialidade) {
+		this.subespecialidade = subespecialidade;
+	}
+
 
 	@Override
 	public int hashCode() {

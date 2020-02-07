@@ -35,16 +35,15 @@ public class AgendaService {
 
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Agenda nao encontrada"));
 	}
-	
+
 	public void delete(Integer id) {
 		try {
-		repo.deleteById(id);
-		}
-		catch (ObjectNotFoundException e) {
+			repo.deleteById(id);
+		} catch (ObjectNotFoundException e) {
 			throw new ObjectNotFoundException("Não foi possivel deletar a agenda");
-			
+
 		}
-		
 	}
-	
+
+
 }

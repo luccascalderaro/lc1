@@ -1,11 +1,16 @@
 package com.luccascalderaro.lc1.service;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.luccascalderaro.lc1.domain.Agenda;
+import com.luccascalderaro.lc1.domain.Agendamento;
+import com.luccascalderaro.lc1.domain.CadastroAgenda;
 import com.luccascalderaro.lc1.domain.Especialidade;
 import com.luccascalderaro.lc1.domain.GrupoProcedimento;
 import com.luccascalderaro.lc1.domain.Medico;
@@ -14,11 +19,15 @@ import com.luccascalderaro.lc1.domain.Prestador;
 import com.luccascalderaro.lc1.domain.PrestadorEndereco;
 import com.luccascalderaro.lc1.domain.Procedimento;
 import com.luccascalderaro.lc1.domain.SubEspecialidade;
+import com.luccascalderaro.lc1.domain.enums.StatusAgendamento;
+import com.luccascalderaro.lc1.domain.enums.StatusCadastroAgenda;
 import com.luccascalderaro.lc1.repositories.AgendaRepository;
+import com.luccascalderaro.lc1.repositories.AgendamentoRepository;
 import com.luccascalderaro.lc1.repositories.CadastroAgendaRepository;
 import com.luccascalderaro.lc1.repositories.EspecialidadeRepository;
 import com.luccascalderaro.lc1.repositories.GrupoProcedimentoRepository;
 import com.luccascalderaro.lc1.repositories.MedicoRepository;
+import com.luccascalderaro.lc1.repositories.PacienteRepository;
 import com.luccascalderaro.lc1.repositories.PrestadorEnderecoRepository;
 import com.luccascalderaro.lc1.repositories.PrestadorRepository;
 import com.luccascalderaro.lc1.repositories.ProcedimentoRepository;
@@ -54,6 +63,13 @@ public class DBService {
 	
 	@Autowired
 	private CadastroAgendaRepository cadastroAgendaRepository;
+	
+	@Autowired
+	private PacienteRepository pacienteRepository;
+	
+	@Autowired
+	private AgendamentoRepository agendamentoRepository;
+	
 	
 	
 	
@@ -131,10 +147,33 @@ public class DBService {
 		
 		prestadorEnderecoRepository.saveAll(Arrays.asList(pEnd1,pEnd2,pEnd3));
 		
-		//Agenda ag = new Agenda(null, med1, Calendar.getInstance().getTime(), 12, 30, StatusCadastroAgenda.ATIVO);
+		
+		CadastroAgenda cadAg1 = new CadastroAgenda(null, StatusCadastroAgenda.ATIVO );
+		
+		Agenda agenda1 = new Agenda(null, med1, new Date(System.currentTimeMillis()), 12, 15,cadAg1, StatusCadastroAgenda.ATIVO);
+		
+		cadAg1.getAgendas().addAll(Arrays.asList(agenda1));
+		
+		SimpleDateFormat smf = new SimpleDateFormat("dd/mm/yyyy");
+		
+		Date n1 = smf.parse("01/01/1990");
+		
+		Paciente paciente1 = new Paciente(null, "Adriano", "Rua teste paciente", n1 , "luccashmc@hotmail.com");
+		
+		Agendamento agendamento1 = new Agendamento(null, agenda1, paciente1, sub1, StatusAgendamento.ATIVO);
+		
+		agenda1.getAgendamento().add(agendamento1);
 		
 		
 		
+		
+		cadastroAgendaRepository.saveAll(Arrays.asList(cadAg1));
+		
+		pacienteRepository.saveAll(Arrays.asList(paciente1));
+		
+		agendaRepository.saveAll(Arrays.asList(agenda1));
+		
+		agendamentoRepository.saveAll(Arrays.asList(agendamento1));
 		
 
 	}

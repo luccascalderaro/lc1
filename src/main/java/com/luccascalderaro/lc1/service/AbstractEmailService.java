@@ -40,7 +40,7 @@ public abstract class AbstractEmailService implements EmailService {
 	
 	public SimpleMailMessage prepararEmailAgendamento(Agendamento obj) {
 		SimpleMailMessage sm = new SimpleMailMessage();
-		sm.setTo(Agendamento.emailPaciente(obj.getPaciente()));
+		sm.setTo(obj.getPaciente().getEmail());
 		sm.setFrom(sender);
 		sm.setSubject("Confirmação de Agendamento");
 		sm.setSentDate(new Date(System.currentTimeMillis()));
@@ -66,7 +66,7 @@ public abstract class AbstractEmailService implements EmailService {
 	protected String htmlFromTemplateAgendamento(Agendamento obj) {
 		Context context = new Context();
 		context.setVariable("agendamento", obj);
-		return templateEngine.process("email/confirmacaoPedido", context);
+		return templateEngine.process("email/confirmacaoAgendamento", context);
 		
 	}
 	
@@ -74,7 +74,7 @@ public abstract class AbstractEmailService implements EmailService {
 		
 		MimeMessage mime = javaMailSender.createMimeMessage();
 		MimeMessageHelper mmh = new MimeMessageHelper(mime, true);
-		mmh.setTo(Agendamento.emailPaciente(obj.getPaciente()));
+		mmh.setTo(obj.getPaciente().getEmail());
 		mmh.setFrom(sender);
 		mmh.setSubject("Confirmação de Agendamento");
 		mmh.setSentDate(new Date(System.currentTimeMillis()));

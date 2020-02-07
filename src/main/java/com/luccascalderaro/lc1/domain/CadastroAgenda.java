@@ -1,6 +1,7 @@
 package com.luccascalderaro.lc1.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -26,14 +27,14 @@ public class CadastroAgenda implements Serializable{
 	private StatusCadastroAgenda status;
 	
 	@OneToMany(mappedBy = "cadastroAgenda")
-	private List<Agenda> agendas;
+	private List<Agenda> agendas = new ArrayList<>();
 	
 	public CadastroAgenda() {
 		this.status = StatusCadastroAgenda.ATIVO;
 	}
 	
 	
-	public CadastroAgenda(Integer id, @NotNull Integer status) {
+	public CadastroAgenda(Integer id, @NotNull StatusCadastroAgenda status) {
 		super();
 		this.id = id;
 		this.status = StatusCadastroAgenda.ATIVO;
