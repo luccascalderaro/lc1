@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.luccascalderaro.lc1.domain.Agenda;
@@ -19,6 +20,8 @@ import com.luccascalderaro.lc1.domain.Prestador;
 import com.luccascalderaro.lc1.domain.PrestadorEndereco;
 import com.luccascalderaro.lc1.domain.Procedimento;
 import com.luccascalderaro.lc1.domain.SubEspecialidade;
+import com.luccascalderaro.lc1.domain.Usuario;
+import com.luccascalderaro.lc1.domain.enums.Perfil;
 import com.luccascalderaro.lc1.domain.enums.StatusAgendamento;
 import com.luccascalderaro.lc1.domain.enums.StatusCadastroAgenda;
 import com.luccascalderaro.lc1.repositories.AgendaRepository;
@@ -32,9 +35,13 @@ import com.luccascalderaro.lc1.repositories.PrestadorEnderecoRepository;
 import com.luccascalderaro.lc1.repositories.PrestadorRepository;
 import com.luccascalderaro.lc1.repositories.ProcedimentoRepository;
 import com.luccascalderaro.lc1.repositories.SubEspecialidadeRepository;
+import com.luccascalderaro.lc1.repositories.UsuarioRepository;
 
 @Service
 public class DBService {
+	
+	@Autowired
+	private BCryptPasswordEncoder pe;
 
 	@Autowired
 	private ProcedimentoRepository procedimentoRepository;
@@ -69,6 +76,9 @@ public class DBService {
 	
 	@Autowired
 	private AgendamentoRepository agendamentoRepository;
+	
+	@Autowired
+	private UsuarioRepository usuarioRepository;
 	
 	
 	
@@ -164,8 +174,13 @@ public class DBService {
 		
 		agenda1.getAgendamento().add(agendamento1);
 		
+		Usuario us1 = new Usuario(null,"luccashmc@hotmail.com",pe.encode("123"));
 		
+		Usuario us2 = new Usuario(null,"luccas.calderaro@gmail.com",pe.encode("123"));
 		
+		us1.addPerfil(Perfil.ADMIN);
+		
+		usuarioRepository.saveAll(Arrays.asList(us1,us2));
 		
 		cadastroAgendaRepository.saveAll(Arrays.asList(cadAg1));
 		

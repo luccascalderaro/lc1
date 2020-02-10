@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.luccascalderaro.lc1.domain.enums.Perfil;
 
 @Entity
@@ -25,34 +26,28 @@ public class Usuario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column (unique = true)
-	@NotNull
-	private String login;
-	
+	@JsonIgnore
 	@NotNull
 	private String senha;
+	
 	
 	@NotNull
 	@Column(unique = true)
 	private String email;
 	
-	@CollectionTable(name = "PERFIL")
 	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "PERFIL")
 	private Set<Integer> perfilList = new HashSet<>();
 	
-	
-
-
 	public Usuario () {
 		addPerfil(Perfil.CLIENTE);
 			
 	}
 
 
-	public Usuario(Integer id, @NotNull String login, @NotNull String senha, @NotNull String email) {
+	public Usuario(Integer id, @NotNull String email, @NotNull String senha) {
 		super();
 		this.id = id;
-		this.login = login;
 		this.senha = senha;
 		this.email = email;
 		addPerfil(Perfil.CLIENTE);
@@ -67,16 +62,6 @@ public class Usuario implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-
-	public String getLogin() {
-		return login;
-	}
-
-
-	public void setLogin(String login) {
-		this.login = login;
 	}
 
 
@@ -100,8 +85,8 @@ public class Usuario implements Serializable {
 	}
 	
 	
-	public Set<Perfil> getPerfilList(Integer cod){
-		return perfilList.stream().map(x -> Perfil.toEnum(cod)).collect(Collectors.toSet());
+	public Set<Perfil> getPerfilList(){
+		return perfilList.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
 	}
 	
 	
