@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.luccascalderaro.lc1.domain.Paciente;
+import com.luccascalderaro.lc1.dto.PacienteDTO;
 import com.luccascalderaro.lc1.service.PacienteService;
 
 @RequestMapping(value = "/paciente")
@@ -49,11 +50,13 @@ public class PacienteResource {
 	}
 	
 	@PostMapping()
-	public ResponseEntity<Void> insert(@Valid @RequestBody Paciente paciente){
+	public ResponseEntity<Void> insert(@Valid @RequestBody PacienteDTO pacienteDto){
 		
-		paciente.setId(null);
 		
-		this.pacienteService.insert(paciente);
+		
+		this.pacienteService.insert(pacienteDto);
+		
+		Paciente paciente = this.pacienteService.findByEmail(pacienteDto.getEmail());
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(paciente.getId()).toUri();
 		
