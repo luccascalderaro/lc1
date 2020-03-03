@@ -48,23 +48,14 @@ public class PacienteService {
 		return repo.save(obj);
 	}
 	
-	public void updateAux(Paciente newObj, Paciente obj) {
-		newObj.setNome(obj.getNome());
-		newObj.setEmail(obj.getEmail());
-		newObj.setEndereco(obj.getEndereco());
-		newObj.setNascimento(obj.getNascimento());
-		newObj.setTelefone(obj.getTelefone());
-		newObj.setAgendamento(obj.getAgendamento());
 	
+	public Paciente update(Integer id, Paciente obj) {
 		
-	}
-	
-	public Paciente update(Paciente obj) {
-		Paciente newObj = find(obj.getId());
+		Paciente p = obj;
 		
-		updateAux(newObj, obj);
+		p.setId(id);
 		
-		return repo.save(newObj);
+		return repo.save(p);
 	}
 
 }

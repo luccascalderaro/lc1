@@ -89,6 +89,7 @@ public class MedicoResource {
 		
 		service.update(obj);
 		
+		
 		return ResponseEntity.noContent().build();
 		
 	}
