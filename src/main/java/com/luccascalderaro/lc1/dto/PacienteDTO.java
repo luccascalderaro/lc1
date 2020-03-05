@@ -5,6 +5,8 @@ import java.io.Serializable;
 public class PacienteDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	private String id;
+	
 	private String nome;
 	
 	private String telefone1;
@@ -26,7 +28,7 @@ public class PacienteDTO implements Serializable {
 
 
 	public PacienteDTO(String nome, String telefone1, String telefone2, String telefone3, String endereco,
-			String nascimento, String email) {
+			String nascimento, String email, String id) {
 		super();
 		this.nome = nome;
 		this.telefone1 = telefone1;
@@ -35,6 +37,7 @@ public class PacienteDTO implements Serializable {
 		this.endereco = endereco;
 		this.nascimento = nascimento;
 		this.email = email;
+		this.id = id;
 	}
 
 
@@ -106,5 +109,17 @@ public class PacienteDTO implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+
+	public String getId() {
+		return id;
+	}
+
+
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	
 	
 }

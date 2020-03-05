@@ -172,6 +172,8 @@ public class DBService {
 		Date n1 = smf.parse("01/01/1990");
 
 		Paciente paciente1 = new Paciente(null, "Adriano", "Rua teste paciente", n1, "luccashmc@hotmail.com");
+		
+		paciente1.getTelefone().add("5656565");
 
 		Agendamento agendamento1 = new Agendamento(null, agenda1, paciente1, sub1, StatusAgendamento.ATIVO);
 

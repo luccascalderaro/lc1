@@ -2,6 +2,7 @@ package com.luccascalderaro.lc1.service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -72,6 +73,8 @@ public class PacienteService {
 		try {
 			data = sdf.parse(dto.getNascimento());
 			Paciente paciente = new Paciente(null, dto.getNome(), dto.getEndereco(), data, dto.getEmail());
+			
+			paciente.getTelefone().addAll(Arrays.asList(dto.getTelefone1(),dto.getTelefone2(),dto.getTelefone3()));
 
 			return paciente;
 		} catch (ParseException e) {
@@ -79,6 +82,17 @@ public class PacienteService {
 			return null;
 		}
 
+	}
+	
+	public PacienteDTO toDto(Paciente paciente) {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		String data = sdf.format(paciente.getNascimento());
+		
+		PacienteDTO dto = new PacienteDTO(paciente.getNome(), paciente.getTelefone().get(0),null, null,
+				paciente.getEndereco(), data , paciente.getEmail(),paciente.getId().toString());
+		
+		return dto;
+		
 	}
 
 }

@@ -2,6 +2,7 @@ package com.luccascalderaro.lc1.resource;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -29,10 +30,14 @@ public class PacienteResource {
 	private PacienteService pacienteService;
 	
 	@GetMapping
-	public ResponseEntity<List<Paciente>> findall(){
+	public ResponseEntity<List<PacienteDTO>> findall(){
 		
 		List<Paciente> list = this.pacienteService.findAll();
-		return ResponseEntity.ok().body(list);
+		
+		List<PacienteDTO> listDto = list.stream().map(x -> pacienteService.toDto(x)).collect(Collectors.toList());
+		
+		
+		return ResponseEntity.ok().body(listDto);
 	}
 	
 	@DeleteMapping(value="/{id}")
