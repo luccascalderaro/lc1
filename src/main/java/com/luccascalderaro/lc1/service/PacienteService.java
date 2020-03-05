@@ -51,9 +51,9 @@ public class PacienteService {
 		return repo.save(paciente);
 	}
 
-	public Paciente update(Integer id, Paciente obj) {
+	public Paciente update(Integer id, PacienteDTO obj) {
 
-		Paciente p = obj;
+		Paciente p = fromDto(obj);
 
 		p.setId(id);
 

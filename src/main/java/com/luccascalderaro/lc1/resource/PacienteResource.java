@@ -69,7 +69,7 @@ public class PacienteResource {
 	}
 	
 	@PutMapping(value="/{id}")
-	public ResponseEntity<Void> update(@Valid @RequestBody Paciente paciente, @PathVariable Integer id){
+	public ResponseEntity<Void> update(@Valid @RequestBody PacienteDTO paciente, @PathVariable Integer id){
 		
 		this.pacienteService.update(id , paciente);
 		
